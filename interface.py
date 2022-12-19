@@ -6,12 +6,12 @@ class Interface:
     def __init__(self):
         pygame.init()
         self.ecran_long,self.ecran_larg = 1100, 750
-        self.fenetre = pygame.display.set_mode((self.ecran_long, self.ecran_larg))
+        self.fenetre = pygame.display.set_mode((self.ecran_long, self.ecran_larg), pygame.RESIZABLE)
         self.image_de_fond = pygame.image.load('Images/bg2.jpg')
-        self.image_de_fond = pygame.transform.scale(self.image_de_fond,(self.ecran_long,self.ecran_larg))
         actif = 1
 
         while actif: 
+            self.image_de_fond = pygame.transform.scale(self.image_de_fond,(self.fenetre.get_width(),self.fenetre.get_height()))
             self.fenetre.blit(self.image_de_fond,(0,0))
             self.menu()
             for event in pygame.event.get():
