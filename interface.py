@@ -5,7 +5,7 @@ from pygame.locals import *
 class Interface:
     def __init__(self):
         pygame.init()
-        self.ecran_long,self.ecran_larg = 463, 600
+        self.ecran_long,self.ecran_larg = 1100, 750
         self.fenetre = pygame.display.set_mode((self.ecran_long, self.ecran_larg))
         self.image_de_fond = pygame.image.load('Images/bg2.jpg')
         self.image_de_fond = pygame.transform.scale(self.image_de_fond,(self.ecran_long,self.ecran_larg))
