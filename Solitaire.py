@@ -1,4 +1,4 @@
-from Carte import JeuDeCarte
+from Carte import JeuDeCarte, Etat
 from enum import Enum
 import sys, pygame
 
@@ -12,15 +12,17 @@ class Deplacement(Enum):
 class Solitaire:
     def __init__(self):
         self.Cartes = JeuDeCarte()
-        self.Cartes.melanger()
         self.zone4 = [[],[],[],[]] #Liste representant l'emplacement finale de 4 Colonnes
         self.zone7 = [[],[],[],[],[],[],[]] # Liste representant l'emplacement initial de 7 colonnes
+        self.partage()
 
     def partage(self): # fonction permettant de repartir les cartes sur l'emplacement initial
-        for num in range(6):
-            for z in range(num,6):
+        for num in range(7):
+            for z in range(num,7):
                 self.zone7[z].append(self.Cartes.cartes[-1])
                 del self.Cartes.cartes[-1]
+        for num in range(7):
+            self.zone7[num][-1].etat = Etat.OUVERT
         
     def deplacer(self, place_depart, place_arrivee, pos1, pos2):
         if place_depart == Deplacement.INITIAL: # teste deplacement:
@@ -140,10 +142,15 @@ class Solitaire:
                     print("Deplacement FINAL -----> INITIAL : La case etait vide")
             else:
                 print("Deplacement Impossible")
+
+    """def derniere_carteZone7(self):
+        for i in range(6):
+            if self.zone7[i][-1].etat == Etat.MASQUE:
+                self.zone7[i][-1].etat == Etat.OUVERT"""
     
 
     def afficher(self):
-        for num in range(6):
+        for num in range(7):
             for z in range(len(self.zone7[num])):
                 print(f"{self.zone7[num][z].couleur} {self.zone7[num][z].numero}")
             print("\n")
